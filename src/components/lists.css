@@ -6,16 +6,37 @@
     gap: 3px;
 }
 
-.lista>.estudiante{
+.lista .estudiante{
     display: grid;
     grid-template-columns: repeat(5, 20%);
+    padding: 6px 0;
+    transition: all .2s;
+    border: 0px solid var(--highlight-color);
 }
 
-.lista>.estudiante:nth-child(even){
+.lista .estudiante:hover{
+    cursor: pointer;
+    padding: 10px 0;
+    border: 2px solid var(--highlight-color);
+}
+
+.lista>.link-estudiante:nth-child(odd)>.estudiante{
     background-color: var(--bg-light-color);
 }
 
-.lista>.estudiante>span{
+.lista .estudiante>span{
     display: grid;
     align-content: center;
+}
+
+.lista>.list-header{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    text-align: center;
+}
+
+.link-estudiante{
+    text-decoration: none;
+    color: inherit;
 }

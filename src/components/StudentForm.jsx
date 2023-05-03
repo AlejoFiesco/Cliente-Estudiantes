@@ -1,11 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { capitalize } from '../util/util';
 import { TIPOS_DOC, PROYECTOS } from '../variables/variables';
 import './forms.css';
 import useStudents from '../hooks/useStudents';
 import { Toaster, toast } from 'react-hot-toast';
 
-export default function StudentForm() {
+export default function StudentForm({id}) {
 
   const form = useRef();
   const codigo = useRef();
@@ -18,7 +18,25 @@ export default function StudentForm() {
   const celular = useRef();
   const proyecto = useRef();
   const correoInstitucional = useRef();
-  const { insertStudent } = useStudents();
+  const { insertStudent, getStudent, updateStudent } = useStudents();
+
+  useEffect(()=>{
+    if(id){
+      codigo.current.value = id;
+      getStudent(id).then(student => {
+        student = student[0];
+        nombres.current.value = student[1];
+        apellidos.current.value = student[2];
+        correoPersonal.current.value = student[3];
+        tipoDoc.current.value = student[4];
+        fechaNacimiento.current.value = student[5].split('T')[0];
+        documento.current.value = student[6];
+        celular.current.value = student[7];
+        proyecto.current.value = student[8];
+        correoInstitucional.current.value = student[9];
+      })
+    }
+  },[id])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -35,11 +53,20 @@ export default function StudentForm() {
       proyectoCurricular: proyecto.current.value,
       correoInstitucional: correoInstitucional.current.value.trim(),
     }
-    if (insertStudent(datos)) {
-      toast.success(`${datos.nombres} ${datos.apellidos} agregado correctamente`)
-      form.current.reset();
+    if(id){
+      if(updateStudent(datos)){
+        toast.success(`${datos.nombres} ${datos.apellidos} actualizado correctamente`)
+        form.current.reset();
+      }else{
+        toast.error(`${nombres} ${apellidos} no se pudo actualizar`)
+      }
     }else{
-      toast.error(`${nombres} ${apellidos} no se pudo agregar`)
+      if (insertStudent(datos)) {
+        toast.success(`${datos.nombres} ${datos.apellidos} agregado correctamente`)
+        form.current.reset();
+      }else{
+        toast.error(`${nombres} ${apellidos} no se pudo agregar`)
+      }
     }
   }
 

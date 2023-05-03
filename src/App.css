@@ -3,6 +3,7 @@
   --button-color-primary: #88ee74;
   --button-color-danger: #f05a5a;
   --bg-light-color: #ececec;
+  --highlight-color: #62c6ff;
 }
 
 h5, h2{
@@ -26,6 +27,7 @@ h5, h2{
   transition: .2s;
   text-align: center;
   margin: 0 auto;
+  z-index: 100;
 }
 
 .boton:hover{

@@ -14,12 +14,34 @@ export default function useStudents() {
       .then(res => setStudents(res.rows))
   }
 
-  function getStudent(id) {
+  async function getStudent(id) {
     const ACTION = 'buscar/' + id;
     let URL = `${HOST}${ACTION}`;
-    fetch(URL)
+    let result = await fetch(URL)
       .then(res => res.json())
-      .then(res => setStudents(res.rows))
+      .then(res => res.rows)
+    return result;
+  }
+
+  async function updateStudent(datos){
+    const ACTION = 'actualizar';
+    let URL = `${HOST}${ACTION}`;
+    const result = fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(datos)
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res) {
+          getStudentsBasico();
+          return true;
+        }
+      })
+      .catch(res => false)
+      return result;
   }
 
   async function insertStudent(datos) {
@@ -46,5 +68,21 @@ export default function useStudents() {
       return result;
   }
 
-  return { getStudentsBasico, insertStudent }
+  async function deleteStudent(codigo) {
+    const ACTION = 'eliminar/';
+    let URL = `${HOST}${ACTION}${codigo}`;
+    const result = fetch(URL)
+      .then(res => res.json())
+      .then(res => {
+        if (res) {
+          const filtrado = students.filter((student) => student[0] !== codigo);
+          setStudents(filtrado)
+          return true;
+        }
+      })
+      .catch(res => false)
+      return result;
+  }
+
+  return { getStudent, getStudentsBasico, insertStudent, deleteStudent, updateStudent }
 }

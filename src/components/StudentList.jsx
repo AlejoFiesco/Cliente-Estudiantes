@@ -8,6 +8,13 @@ export default function StudentList() {
 
   return (
     <div className="lista">
+      <div className="list-header">
+        <h4>Código</h4>
+        <h4>Nombres</h4>
+        <h4>Apellidos</h4>
+        <h4>Correo personal</h4>
+        <h4>Eliminar</h4>
+      </div>
       {students.map((student, index) => <Student key={index} {...student} />)}
     </div>
   )
