@@ -1,0 +1,21 @@
+.lista{
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.lista>.estudiante{
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+}
+
+.lista>.estudiante:nth-child(even){
+    background-color: var(--bg-light-color);
+}
+
+.lista>.estudiante>span{
+    display: grid;
+    align-content: center;
+}

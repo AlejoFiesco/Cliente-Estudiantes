@@ -1,0 +1,38 @@
+:root{
+  --border-color: #c2c2c2;
+  --button-color-primary: #88ee74;
+  --button-color-danger: #f05a5a;
+  --bg-light-color: #ececec;
+}
+
+h5, h2{
+  text-align: center;
+}
+
+.delete-color{
+  background-color: var(--button-color-danger) !important;
+  color: white !important;
+}
+
+.boton{
+  display: block;
+  width: fit-content;
+  background-color: var(--button-color-primary);
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  padding: 5px;
+  transition: .2s;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.boton:hover{
+  filter: brightness(1.2);
+  cursor: pointer;
+}
+
+.link:hover{
+
+}
