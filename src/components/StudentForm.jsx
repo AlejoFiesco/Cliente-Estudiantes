@@ -4,6 +4,7 @@ import { TIPOS_DOC, PROYECTOS } from '../variables/variables';
 import './forms.css';
 import useStudents from '../hooks/useStudents';
 import { Toaster, toast } from 'react-hot-toast';
+import { useLocation } from 'wouter';
 
 export default function StudentForm({id}) {
 
@@ -19,6 +20,7 @@ export default function StudentForm({id}) {
   const proyecto = useRef();
   const correoInstitucional = useRef();
   const { insertStudent, getStudent, updateStudent } = useStudents();
+  const [location, setLocation] = useLocation();
 
   useEffect(()=>{
     if(id){
@@ -68,6 +70,7 @@ export default function StudentForm({id}) {
         toast.error(`${nombres} ${apellidos} no se pudo agregar`)
       }
     }
+    setLocation('/');
   }
 
   return (
